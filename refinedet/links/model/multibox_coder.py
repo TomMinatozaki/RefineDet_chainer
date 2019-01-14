@@ -309,7 +309,7 @@ class RefineDetMultiboxCoder(MultiboxCoder):
         objectness /= objectness + negativeness
 
         # negative anchor filtering
-        mb_score[objectness <= 0.01] = 0
+        mb_score[xp.tile(objectness,mb_score.shape[-1] ) <= 0.01] = 0
 
         bbox = list()
         label = list()
